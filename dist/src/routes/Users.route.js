@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const Users_controller_1 = __importDefault(require("../controllers/Users.controller"));
+const authAction_1 = require("../middlewares/authAction");
+const HandleError_1 = require("../utils/HandleError");
+const router = express_1.default.Router();
+router.post('/login', (0, HandleError_1.asyncMiddle)(Users_controller_1.default.login));
+router.post('/refresh_token', (0, HandleError_1.asyncMiddle)(Users_controller_1.default.getAccessToken));
+router.post('/register', (0, HandleError_1.asyncMiddle)(Users_controller_1.default.register));
+router.post('/create-bmi', authAction_1.AuthenticateToken, (0, HandleError_1.asyncMiddle)(Users_controller_1.default.createBMI));
+router.post('/update-bmi', authAction_1.AuthenticateToken, (0, HandleError_1.asyncMiddle)(Users_controller_1.default.updateBMI));
+router.get('/bmi', authAction_1.AuthenticateToken, (0, HandleError_1.asyncMiddle)(Users_controller_1.default.getBMI));
+router.get('/info', authAction_1.AuthenticateToken, (0, HandleError_1.asyncMiddle)(Users_controller_1.default.getInfoUser));
+router.post('/habit', authAction_1.AuthenticateToken, (0, HandleError_1.asyncMiddle)(Users_controller_1.default.addHabit));
+router.get('/habit', authAction_1.AuthenticateToken, (0, HandleError_1.asyncMiddle)(Users_controller_1.default.getHabit));
+router.get('/logout', authAction_1.AuthenticateToken, (0, HandleError_1.asyncMiddle)(Users_controller_1.default.logout));
+exports.default = router;
