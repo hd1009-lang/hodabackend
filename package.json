@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Hoda food",
   "scripts": {
-    "dev": "nodemon --exec npx ts-node --files src/server.ts"
+    "dev": "nodemon --exec npx ts-node --files src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "heroku-postbuild": "tsc"
   },
   "author": "hoda",
   "license": "MIT",
