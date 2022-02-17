@@ -34,12 +34,10 @@ const UserController = {
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', data: result.user, token: result.refreshToken });
     },
     getAccessToken: async (req: Request, res: Response) => {
-        const rf_token = req.headers.cookie;
-        console.log(rf_token);
-        return res.status(HttpStatusCode.OK).json({ message: 'Thành công', token: rf_token });
-        // if (!rf_token) throw ErrorApi.UnAuthenticate(rf_token);
-        // const accessToken = UserServices.getAccessToken(rf_token);
-        // return res.status(HttpStatusCode.OK).json({ message: 'Thành công', token: accessToken });
+        const rf_token = req.cookies.refresh_token;
+        if (!rf_token) throw ErrorApi.UnAuthenticate(rf_token);
+        const accessToken = UserServices.getAccessToken(rf_token);
+        return res.status(HttpStatusCode.OK).json({ message: 'Thành công', token: accessToken });
     },
     createBMI: async (req: Request, res: Response) => {
         const id = req.user;
