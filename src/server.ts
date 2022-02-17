@@ -23,8 +23,7 @@ app.use(express.json());
 // app.use(helmet());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-const PORT =process.env.PORT || 8000;
-
+const PORT = process.env.PORT || 8000;
 app.get('/', (req, res) => {
     return res.redirect('/docs');
 });
@@ -40,6 +39,6 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, cssOptions));
 
 app.use(handleErrorMessage);
 
-app.listen(PORT, () => {
-    console.log(`Let's the game begin 🚀`);
-});
+http.listen((process.env.PORT || 8000), function(){
+    console.log('listening on *:8000');
+  });
