@@ -26,10 +26,11 @@ const UserController = {
         Validate.UserValidation.ValidateLogin(content);
         const result = await UserServices.LoginUser(content);
         res.cookie('refresh_token', result.refreshToken, {
+            sameSite: 'none',
+            secure: true,
             httpOnly: true,
-            path: '/api/users/refresh_token',
-            domain: '.hodathefood.vercel.app',
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7d
+            path: `/api/users/refresh_token`,
+            maxAge: 30 * 24 * 60 * 60 * 1000, // 30days
         });
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', data: result.user, token: result.refreshToken });
     },
