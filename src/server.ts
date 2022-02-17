@@ -2,6 +2,8 @@ import { handleErrorMessage } from './utils/HandleError';
 import express from 'express';
 import connectDB from './config/db';
 import dotenv from 'dotenv';
+dotenv.config();
+
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
@@ -10,20 +12,15 @@ import path from 'path';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocument from '../docs/Swagger';
 
-dotenv.config();
-
 connectDB();
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:3001', 'https://hoda-client.vercel.app'];
-
 app.use(cors({ credentials: true, origin: true }));
 app.use(express.json());
-// app.use(helmet());
+app.use(helmet());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-const PORT = process.env.PORT || 8000;
 app.get('/', (req, res) => {
     return res.redirect('/docs');
 });
@@ -39,6 +36,7 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, cssOptions));
 
 app.use(handleErrorMessage);
 
-app.listen((process.env.PORT || 8000), function(){
-    console.log('listening on *:8000');
-  });
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+    console.log('Server is running on port', PORT);
+});
