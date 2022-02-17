@@ -5,7 +5,7 @@ import { asyncMiddle } from '../utils/HandleError';
 const router = express.Router();
 
 router.post('/login', asyncMiddle(UserController.login));
-router.post('/refresh_token', asyncMiddle(UserController.getAccessToken));
+router.get('/refresh_token', asyncMiddle(UserController.getAccessToken));
 router.post('/register', asyncMiddle(UserController.register));
 router.post('/create-bmi', AuthenticateToken, asyncMiddle(UserController.createBMI));
 router.post('/update-bmi', AuthenticateToken, asyncMiddle(UserController.updateBMI));
