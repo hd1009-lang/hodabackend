@@ -23,7 +23,7 @@ app.use(express.json());
 // app.use(helmet());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-const PORT = 8000;
+const PORT =process.env.PORT || 8000;
 
 app.get('/', (req, res) => {
     return res.redirect('/docs');
