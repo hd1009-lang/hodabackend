@@ -13,5 +13,5 @@ router.get('/bmi', AuthenticateToken, asyncMiddle(UserController.getBMI));
 router.get('/info', AuthenticateToken, asyncMiddle(UserController.getInfoUser));
 router.post('/habit', AuthenticateToken, asyncMiddle(UserController.addHabit));
 router.get('/habit', AuthenticateToken, asyncMiddle(UserController.getHabit));
-router.get('/logout', AuthenticateToken, asyncMiddle(UserController.logout));
+router.get('/logout', asyncMiddle(UserController.logout));
 export default router;

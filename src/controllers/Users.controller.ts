@@ -25,7 +25,7 @@ const UserController = {
         };
         Validate.UserValidation.ValidateLogin(content);
         const result = await UserServices.LoginUser(content);
-        res.cookie('refreshtoken', result.refreshToken, {
+        res.cookie('refresh_token', result.refreshToken, {
             sameSite: 'none',
             secure: true,
             httpOnly: true,
@@ -35,7 +35,7 @@ const UserController = {
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', data: result.user, token: result.refreshToken });
     },
     getAccessToken: async (req: Request, res: Response) => {
-        const rf_token = req.cookies.refreshtoken
+        const rf_token = req.cookies.refresh_token;
         if (!rf_token) throw ErrorApi.UnAuthenticate(rf_token);
         const accessToken = UserServices.getAccessToken(rf_token);
         return res.status(HttpStatusCode.OK).json({ message: 'Thành công', token: accessToken });
