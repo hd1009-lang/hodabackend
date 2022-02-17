@@ -39,6 +39,6 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument, cssOptions));
 
 app.use(handleErrorMessage);
 
-http.listen((process.env.PORT || 8000), function(){
+app.listen((process.env.PORT || 8000), function(){
     console.log('listening on *:8000');
   });
